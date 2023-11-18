@@ -18,16 +18,13 @@ let handleUserLogin = (email, password) => {
     return new Promise(async (resolve, reject) => {
         try {
             let userData = {};
-
             let isExist = await checkUserEmail(email);
             if (isExist) {
                 //User already exist
                 let user = await db.User.findOne({
-                    attributes: ['email', 'roleId', 'password'],
-
+                    attributes: ['email', 'roleId', 'password', 'firstName', 'lastName'],
                     where: { email: email },
                     raw: true
-
                 });
                 if (user) {
                     //compare password

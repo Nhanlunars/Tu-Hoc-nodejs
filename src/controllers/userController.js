@@ -16,7 +16,7 @@ let handleLogin = async (req, res) => {
     console.log(userData)
     //check email exits
     //copmare password
-    //return userInfor
+    //return userInfo
     //access token:JWT json web token
 
 
@@ -32,7 +32,6 @@ let handleLogin = async (req, res) => {
 
 let handleGetAllUser = async (req, res) => {
     let id = req.query.id; //All, id
-
     if (!id) {
         return res.status(200).json({
             errCode: 1,
