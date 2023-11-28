@@ -28,8 +28,10 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use(bodyPaster.json());
-app.use(bodyPaster.urlencoded({ extended: true }))
+//app.use(bodyPaster.json());
+//app.use(bodyPaster.urlencoded({ extended: true }))
+app.use(bodyPaster.json({ limit: '50mb' }));
+app.use(bodyPaster.urlencoded({ limit: '50mb', extended: true }))
 
 viewEngine(app);
 initWebRoutes(app);
