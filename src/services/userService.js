@@ -152,7 +152,7 @@ let deleteUser = (userId) => {
                 errMessage: `The user isn't exist`
             })
         }
-        console.log('check', foundUser)
+        //console.log('check', foundUser)
         await db.User.destroy({
             where: { id: userId }
         }
