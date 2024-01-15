@@ -17,7 +17,14 @@ let sendSimpleEmail = async (dataSend) => {
         from: '" nhanlunars 👻" <trungthu387@gmail.com>', // sender address
         to: dataSend.reciverEmail, // list of receivers
         subject: "Thông tin đặt lịch khám bệnh", // Subject line
-        html: `
+        html: getBodyHTMLEmail(dataSend)
+    });
+}
+
+let getBodyHTMLEmail = (dataSend) => {
+    let result = '';
+    if (dataSend.language === 'vi') {
+        result = `
         <h3>Xin chào ${dataSend.patientName} </h3>
         <p>Bạn nhận được email này vì đặt lịch khám bệnh online trên App </p>
         <p> Thông tin đặt lịch khám bệnh: </p>
@@ -28,13 +35,31 @@ let sendSimpleEmail = async (dataSend) => {
         xác nhận và hoàn tất thủ tục đặt lịch khám bệnh.
         </p>
         <div>
-        <a href=${dataSend.redirectLink} target="_blank>Click here</a>
+        <a href=${dataSend.redirectLink} target="_blank">Click here</a>
         </div>
         <div>Xin chân thành cảm ơn </div>
-        `, // html body
-    });
+        `// html body
+    }
+    if (dataSend.language === 'en') {
+        result = `
+        <h3>Dear ${dataSend.patientName} </h3>
+        <p>You received this email because you booked an online medical examination appointment on the App </p>
+        <p>Information for scheduling medical examination:</p>
+        <div><b>Time: ${dataSend.time}</b></div>
+        <div><b>Doctor: ${dataSend.doctorName}</b></div>
 
+        <p>If the above information is true, please click on the link below
+        Confirm and complete medical appointment scheduling procedures.
+        </p>
+        <div>
+        <a href=${dataSend.redirectLink} target="_blank">Click here</a>
+        </div>
+        <div>Sincerely thank </div>
+        `// html body
+    }
+    return result;
 }
+
 
 
 module.exports = {
